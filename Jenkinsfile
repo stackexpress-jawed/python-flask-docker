@@ -20,6 +20,7 @@ pipeline {
     }
 
     environment {
+        IMAGE_NAME = 'se/python-flask-dcoker'
         docker_image = ''
         latest_stage = 'Start'
     }
