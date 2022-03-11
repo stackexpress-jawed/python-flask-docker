@@ -32,7 +32,6 @@ pipeline {
                 }
             
             steps {
-                latest_stage = 'Lint Dockerfile'
                 echo 'Running Dockerfile Linter...'
                 
                 sh 'hadolint  -V Dockerfile'
@@ -42,7 +41,6 @@ pipeline {
         // Stage3 : Build
         stage('Build Docker Image') {
             steps {
-                latest_stage = 'Build Docker Image'
                 echo 'Starting docker build...'
                 script {
                     latestStage = env.STAGE_NAME
