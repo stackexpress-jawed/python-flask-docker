@@ -61,7 +61,7 @@ pipeline {
 //             channel: "${slackChannel}",
             message: """
                 Pipeline: <${env.BUILD_URL}/console|${env.JOB_NAME}>
-                Git branch: `${REPO_BRANCH}`
+                Git branch: `${env.GIT_BRANCH}`
                 Build number: *${env.BUILD_DISPLAY_NAME}*
                 Build status: *${currentBuild.result}*
                 Total runtime: *${currentBuild.durationString}*
@@ -76,7 +76,7 @@ pipeline {
 //             channel: "${slackChannel}",
             message: """
                 Pipeline: <${env.BUILD_URL}/console|${env.JOB_NAME}>
-                Git branch: `${REPO_BRANCH}`
+                Git branch: `${env.GIT_BRANCH}`
                 Build number: *${env.BUILD_DISPLAY_NAME}*
                 Build status: *${currentBuild.result}*
                 Failed stage *${latest_stage}*
