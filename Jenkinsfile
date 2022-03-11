@@ -21,14 +21,18 @@ pipeline {
 
     environment {
         docker_image = ''
-        latestStage = ''
+        latest_stage = 'Start'
     }
 
     stages {
         // Stage1:  Lint
         stage('Lint Dockerfile') {
+            script {
+                    latestStage = env.STAGE_NAME
+                }
+            
             steps {
-                latestStage = 'Lint Dockerfile'
+                latest_stage = 'Lint Dockerfile'
                 echo 'Running Dockerfile Linter...'
                 
                 sh 'hadolint  -V Dockerfile'
@@ -38,9 +42,10 @@ pipeline {
         // Stage3 : Build
         stage('Build Docker Image') {
             steps {
-                latestStage = 'Build Docker Image'
+                latest_stage = 'Build Docker Image'
                 echo 'Starting docker build...'
                 script {
+                    latestStage = env.STAGE_NAME
                     docker_image = docker.build("${IMAGE_NAME}:${BUILD_ID}")
                 }
            }
@@ -76,7 +81,7 @@ pipeline {
                 Git branch: `${REPO_BRANCH}`
                 Build number: *${env.BUILD_DISPLAY_NAME}*
                 Build status: *${currentBuild.result}*
-                Failed stage *${latestStage}*
+                Failed stage *${latest_stage}*
             """.stripIndent()
             
         }
