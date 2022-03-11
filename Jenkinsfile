@@ -27,11 +27,11 @@ pipeline {
     stages {
         // Stage1:  Lint
         stage('Lint Dockerfile') {
-            script {
+            steps {
+                script {
                     latestStage = env.STAGE_NAME
                 }
             
-            steps {
                 echo 'Running Dockerfile Linter...'
                 
                 sh 'hadolint  -V Dockerfile'
