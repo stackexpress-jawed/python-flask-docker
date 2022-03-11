@@ -34,11 +34,11 @@ pipeline {
             
                 echo 'Running Dockerfile Linter...'
                 
-                sh 'hadolint  -V Dockerfile'
+//                 sh 'hadolint  -V Dockerfile'
             }
         }
 
-        // Stage3 : Build
+        // Stage2 : Build
         stage('Build Docker Image') {
             steps {
                 echo 'Starting docker build...'
@@ -58,7 +58,7 @@ pipeline {
             
             // Send success message on Slack
             slackSend color: 'good',
-            channel: "${slackChannel}",
+//             channel: "${slackChannel}",
             message: """
                 Pipeline: <${env.BUILD_URL}/console|${env.JOB_NAME}>
                 Git branch: `${REPO_BRANCH}`
@@ -73,7 +73,7 @@ pipeline {
             
             // Send alert on Slack
             slackSend color: 'danger',
-            channel: "${slackChannel}",
+//             channel: "${slackChannel}",
             message: """
                 Pipeline: <${env.BUILD_URL}/console|${env.JOB_NAME}>
                 Git branch: `${REPO_BRANCH}`
