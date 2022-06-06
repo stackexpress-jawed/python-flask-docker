@@ -56,6 +56,8 @@ pipeline {
     post {
         success {
             echo 'Job successful'
+            echo "$docker_image.id"
+            echo "$docker_image.imageName()"
             
             // Send success message on Slack
             slackSend color: 'good',
